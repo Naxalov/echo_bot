@@ -1,7 +1,7 @@
 #Import library for telegram bot
 import requests
 
-TOKEN = '5355192064:AAHeVCobTRAUsm0lsi9e_l_QZbfFMVuVFeM'
+TOKEN = '5446020024:AAHcDq0gInuUnVWolbamoUNoqbFA490U4N8'
 
 #Send message 
 def send_message(text:str, chat_id:int):
@@ -39,9 +39,9 @@ current_update_id = -1 #results[-1]['update_id']
 while True:
     results = get_updates()
 
+    text, chat_id ,current_update_id = get_last_update(results)
     if last_update_id != current_update_id:
         print(last_update_id)
-        text, chat_id ,current_update_id = get_last_update(results)
         send_message(text, chat_id)
         
         last_update_id = current_update_id
