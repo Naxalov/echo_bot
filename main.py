@@ -11,7 +11,7 @@ def send_message(text:str, chat_id:int):
 
 
 #Get updates
-def get_updates():
+def get_updates()->list:
     url = f'https://api.telegram.org/bot{TOKEN}/getUpdates'
     answer = requests.get(url)
     data = answer.json()
@@ -20,9 +20,9 @@ def get_updates():
     
     return result
 
-def get_last_update(updates):
+def get_last_update(result:list):
     # Get last update
-    update = updates[-1]
+    update = result[-1]
     # Get message text
     text = update['message']['text']
     # Get chat id
@@ -30,28 +30,13 @@ def get_last_update(updates):
     # Get update id
     update_id = update['update_id']
     return text, chat_id,update_id
-
-
-# Last update id
-last_update_id = get_last_update(get_updates())[-1]
-#Send message through loop
-current_update_id = -1 #results[-1]['update_id']
-while True:
-    results = get_updates()
-
-    if last_update_id != current_update_id:
-        print(last_update_id)
-        text, chat_id ,current_update_id = get_last_update(results)
-        send_message(text, chat_id)
-        
-        last_update_id = current_update_id
-
     
+stroge=''
 
-# chat_id = '5575549228'
-# idx = 1
-# while True:
-#     #Send message to chat_id
-#     send_message(f'Hello: {idx}', chat_id)
-#     idx+=1
-#     print(f'Message sent:{idx}')
+while True:
+    result = get_updates()
+    text, chat_id, update_id = get_last_update(result)
+    print(text, stroge)
+    if text != stroge:
+        stroge=text
+        send_message(text, chat_id)
