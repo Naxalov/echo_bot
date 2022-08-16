@@ -37,7 +37,7 @@ last_update_id = get_last_update(get_updates())[-1]
 #Send message through loop
 while True:
     results = get_updates()
-    current_update_id = get_last_update(get_updates())[-1]
+    current_update_id = get_last_update(results)[-1]
 
     if last_update_id != current_update_id:
         print(last_update_id)
