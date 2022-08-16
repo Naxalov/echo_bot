@@ -32,9 +32,15 @@ def get_last_update(result:list):
     return text, chat_id,update_id
     
 
+
+# Last update id
+last_update_id = -1
+
 while True:
 
 
-    text, chat_id ,current_update_id = get_last_update(results)
+    text, chat_id, current_update_id = get_last_update(results)
     if last_update_id != current_update_id:
         send_message(text, chat_id)
+        last_update_id = current_update_id
+
